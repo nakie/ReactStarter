@@ -1,0 +1,48 @@
+// Stoge file to hold commonly used styles
+// across templates
+
+// Classes for evenly distrubuted child elements
+
+
+._2wide{
+	
+	.make-row();
+
+	// Make-row() extends clearfix()
+	// I should not have to call it manually...
+	.clearfix();
+	&>div{
+		.make-sm-column(6);
+	}
+} // - END .2wide class
+
+._3wide{
+	.make-row();
+
+	// Make-row() extends clearfix()
+	// I should not have to call it manually...
+	.clearfix();
+
+	&>div{
+		.make-sm-column(4);
+	}
+} // - END .3wide Class
+
+._4wide{
+	.make-row();
+
+	// Make-row() extends clearfix()
+	// I should not have to call it manually...
+	.clearfix();
+	&>div{
+		.make-sm-column(3);
+	}
+
+} // - END .4wide Class
+
+
+.block-center {
+	float:none;
+	margin-left: auto;
+	margin-right: auto;
+}

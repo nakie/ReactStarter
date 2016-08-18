@@ -1,0 +1,811 @@
+<!-- views/pages/agent-registration.ejs -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<% include ../partials/head %>
+	</head>
+	
+	<body class="">
+
+<header class="container-fluid" >
+
+		<div class="row">
+
+			<div class="col-md-4 col-md-offset-1 logo" > 
+				<img src="/img/SouthernInsurance_logo.png" />
+			</div>
+			
+			<div id="loginFrm" class="col-md-7 login" >
+
+				<form class="col-sm-11 col-lg-10 block-center" method="GET" action="home" >
+
+					<div class="row">
+						<div class="inputGroup col-sm-5">
+							<!-- <label for="usernameTxt" > Username </label> -->
+							<input type="text" class="form-control input-sm" id="usernameTxt" placeholder="Username" >                        
+						</div><!-- ./form-group username -->
+						
+						<div class="inputGroup col-sm-5">                    
+							<!-- <label for = "passwordTxt" > Password </label> -->
+							<input type="password" class="form-control input-sm" id="passwordTxt" placeholder="Password" >                        
+						</div><!-- ./form-group password -->
+
+						<div class="inputGroup col-sm-2" >
+							<button type="submit" class="btn btn-default input-sm ">Sign In </button>
+						</div> <!-- ./ form-group sumit button -->
+
+					</div>
+
+					<div class="row">
+						<div class="pull-right" >
+							<div class="checkbox">
+								<label  >
+									<input class="" type="checkbox" > Remember me
+								</label>
+							</div><!-- ./ checkbox  Remember Me-->
+						</div>
+
+					</div>
+										
+				</form> <!--  /.authFrm -->
+
+			</div> <!-- /.login -->
+
+		</div>
+
+	</header>
+
+		<main class="container" id="registrationFullFrm" >
+
+			<aside class="formTracker-container" >
+
+				<nav class="formTracker-nav ">
+
+					<ul class=" ">
+						<li class="active" >
+							<a href="#" data-target="agentInfoFldset" > Agent Information </a>
+						</li>
+						<li>
+							<a href="#" data-target="addressFldset"> Address </a>
+						</li>
+						<li>
+							<a href="#" data-target="licenseFldset"> License </a>
+						</li>
+						<!-- <li>
+							<a href="#" data-target=""> Step 4 </a>
+						</li> -->
+						<li>
+							<a href="#" data-target="finishFldset"> Finish </a>
+						</li>
+					</ul>
+
+				</nav> 
+				<!-- ./formNav -->
+			
+			</aside> 
+			<!--  ./formTracker -->
+
+			<div class= "formBody">
+
+				<fieldset id="agentInfoFldset" class="collapse" > 
+
+					<legend> Agent Information </legend>
+
+					<!-- Today's Date -->
+					<!-- TODO:: Generate this so user does not haveto enter -->
+					<div class= "inputGroup" >  
+						<label for="dateTxt" >Today's Date</label>
+						<input type="date" id="dateTxt" name="dateToday"></input>
+					</div>
+					
+					<!-- Agent Name -->
+					<div class="agentName">
+						<div class="inputGroup required">
+							<label for="firstNameTxt" >First Name</label>    
+							<input type="text" name="firstName" id="firstNameTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+
+						<div class="inputGroup">
+							<label for="middleNameTxt" >Middle Name</label>    
+							<input type="text" name="middleName" id="middleNameTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+
+						<div class="inputGroup">
+							<label for="lastNameTxt" >Last Name</label>    
+							<input type="text" name="lastName" id="lastNameTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+
+					</div>
+					<!-- ./agentName -->
+
+					<!-- Phone #s -->
+					<div class="phoneNumbers">
+						<div class="inputGroup">
+							<label for="phoneTxt" >Phone</label>    
+							<input type="tel" name="phone" id="phoneTxt" value="" >
+						</div>
+						<!-- ./inputGroup -->
+						
+						<div class="inputGroup">
+							<label for="secondaryPhoneTxt" >Secondary Phone</label>    
+							<input type="tel" name="secondaryPhone" id="secondaryPhoneTxt" value="" >
+						</div>
+						<!-- ./inputGroup -->
+					</div>
+					<!-- ./phoneNumbers -->
+					
+					<!-- Email Addresses -->
+					<div class="emailAddresses">
+						<div class="inputGroup">
+							<label for="primaryEmailEml" >Primary Email</label>    
+							<input type="email" name="primaryEmail" id="primaryEmailEml" value="" required="required" >
+						</div>
+						<!-- ./inputGroup -->                    
+						
+						<div class="inputGroup">
+							<label for="secondaryEmailEml" >Secondary Email</label>    
+							<input type="email" name="secondaryEmail" id="secondaryEmailEml" value="" required="required" >
+						</div>
+						<!-- ./inputGroup -->
+					</div>
+					<!-- ./emailAddresses  -->
+					
+					<!-- SS# -->
+					<div class="inputGroup">
+						<label for="socialSecurityTxt" >Producing Agent Social Security</label>    
+						<input type="text" name="socialSecurity" id="socialSecurityTxt" value="" aria-describedby="ssnHelp" >
+						<p id="ssnHelp" class="help">Please Note: This cannot be an EIN and is required for appointment.</p>
+					</div>
+					<!-- ./inputGroup -->
+					
+
+					<!-- Date of Birth -->
+					<div class="inputGroup">
+						<label for="dateOfBirth" >Date of Birth</label>    
+						<input type="date" name="dateOfBirth" id="dateOfBirth" >
+					</div>
+					<!-- ./ inputGroup -->
+					
+					<div class="optionGroup">
+						<label class="optionTitle">Residence Status</label>
+						<label>
+							<input type="radio" name="citizenShipStatus" class="uSCitizenOpt" value="1">
+							US Citizen
+						</label>
+						<label>
+							<input type="radio" name="citizenShipStatus" class="uSPermanentResidentOpt" value="2">
+							US Permanent Resident
+						</label>
+						<label>
+							<input type="radio" name="citizenShipStatus" class="otherOpt" value="0">
+							Other
+						</label>                        
+						
+					</div>
+					<!-- ./ optionGroup -->
+					
+				</fieldset>
+				<!-- ./ Agent Information Fieldset -->
+
+				<fieldset id="addressFldset" class="collapse" >
+					<legend>Address</legend>
+					
+					<!-- Business Address  -->
+					<div class="inputGroup">
+						<label for="businessMailingAddressTxt" >Business Mailing Address</label>    
+						<input type="text" name="businessMailingAddress" id="businessMailingAddressTxt" value=""  >
+					</div>
+					<!-- ./inputGroup -->
+					
+					<div class="inputGroup">
+						<label for="businessMailingAddressLine2Txt" >Business Mailing Address Line 2</label>    
+						<input type="text" name="businessMailingAddressLine2" id="businessMailingAddressLine2Txt" value=""  >
+					</div>
+					<!-- ./inputGroup -->
+					
+					<div class="locale">
+						<div class="inputGroup">
+							<label for="cityTxt" >City</label>    
+							<input type="text" name="city" id="cityTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+						
+						<div class="optionGroup">
+							<label class="optionTitle" for="stateOpt" >State</label>    
+							<select name="state" id="stateOpt" >
+								<option value="">-- Select One --</option>
+								
+							</select>
+						</div>
+						<!-- ./optionGroup -->
+						
+						<div class="inputGroup" >
+							<label for="postalCodeTxt" >Postal Code</label>    
+							<input type="text" name="postalCode" id="postalCodeTxt" value="" > 
+						</div>
+						<!-- ./inputGroup -->
+					</div>
+
+					<div class="addressOptions">
+						<div class="optionGroup" id="shipAddressCtrl" >
+							<label class="optionTitle">Shipping/Physical Addresses</label>
+							<label>
+								<input type="checkbox" name="shipBusiness" class="shipTothisAddress?Opt" value="Y">
+								Ship to this address?
+							</label>
+													
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup" id="homeAddress">
+							<label class="optionTitle">Home Addresses</label>
+							<label>
+								<input type="checkbox" name="homeBusiness" class="isThisyourHomeAddress?Opt" value="Y">
+								Is this your Home Address?
+
+							</label>                            
+													
+						</div>
+						<!-- ./ optionGroup -->
+					</div>
+					<!-- ./addressOptions    -->
+					
+					<!-- is Home address same as above? -->
+
+					<!-- Home Address ( if not same ) -->
+					<div class='homeAddress'>
+
+						<div class="inputGroup">
+							<label for="homeMailingAddressTxt" >Home Mailing Address</label>    
+							<input type="text" name="homeMailingAddress" id="homeMailingAddressTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+					
+						<div class="inputGroup">
+							<label for="homeMailingAddressLine2Txt" >Home Mailing Address Line 2</label>    
+							<input type="text" name="homeMailingAddressLine2" id="homeMailingAddressLine2Txt" value="" >
+						</div>
+						<!-- ./inputGroup -->
+
+						<div class="locale">
+
+							<div class="inputGroup">
+								<label for="homeCityTxt" >Home City</label>    
+								<input type="text" name="homeCity" id="homeCityTxt" value=""  >
+							</div>
+							<!-- ./inputGroup -->
+							
+							<div class="optionGroup">
+								<label class="optionTitle" for="homeStateOpt" >Home State</label>    
+								<select name="homeState" id="homeStateOpt" >
+									<option value="">-- Select One --</option>
+									
+								</select>
+							</div>
+							<!-- ./optionGroup -->
+							
+							<div class="inputGroup">
+								<label for="homePostalCodeTxt" >Home Postal Code</label>    
+								<input type="text" name="homePostalCode" id="homePostalCodeTxt" value=""  >
+							</div>
+							<!-- ./inputGroup -->
+
+						</div>
+						<!-- ./locale -->
+						
+					</div>
+					<!-- ./homeAddress -->
+					<div class="addressOptions">
+						<div class="optionGroup" id="shipAddressCtrl" >
+							<label class="optionTitle">Shipping/Physical Addresses</label>
+							<label>
+								<input type="checkbox" name="shipBusiness" class="shipTothisAddress?Opt" value="Y">
+								Ship to this address?
+							</label>
+													
+						</div>
+						<!-- ./ optionGroup -->
+
+					</div>
+					<!-- ./addressOptions    -->
+
+					<!-- Is physical address same as above? -->
+					<!-- Pyhsical Address ( if not same ) -->                    
+					<div class="shipAddress">                        
+
+						<div class="inputGroup">
+							<label for="shippingMailingAddressTxt" >Shipping Mailing Address</label>    
+							<input type="text" name="shippingMailingAddress" id="shippingMailingAddressTxt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+						
+						<div class="inputGroup">
+							<label for="shippingMailingAddressLine2Txt" >Shipping Mailing Address Line 2</label>    
+							<input type="text" name="shippingMailingAddressLine2" id="shippingMailingAddressLine2Txt" value=""  >
+						</div>
+						<!-- ./inputGroup -->
+						<div class="locale">
+							<div class="inputGroup">
+								<label for="shipToCityTxt" >Ship to City</label>    
+								<input type="text" name="shipToCity" id="shipToCityTxt" value=""  >
+							</div>
+							<!-- ./inputGroup -->
+							
+							<div class="optionGroup">
+								<label class="optionTitle" for="shipToStateOpt" >Ship To State</label>    
+								<select name="shipToState" id="shipToStateOpt" >
+									<option value="">-- Select One --</option>
+									
+								</select>
+							</div>
+							<!-- ./optionGroup -->
+							
+							<div class="inputGroup">
+								<label for="shipToPostalCodeTxt" >Ship To Postal Code</label>    
+								<input type="text" name="shipToPostalCode" id="shipToPostalCodeTxt" value=""  >
+							</div>
+							<!-- ./inputGroup -->
+						
+						</div>
+						<!-- ./locale -->
+
+					</div>
+					<!-- ./shipAddress -->
+
+
+				
+				</fieldset>
+				<!-- ./ Address fieldset -->
+								
+				<fieldset id="licenseFldset" class="collapse" >
+					<legend>License</legend>
+
+					<!-- NPN # -->
+					<div class="inputGroup">
+						<label for="nationalProducerNumberTxt" >National Producer Number</label>    
+						<input type="text" name="nationalProducerNumber" id="nationalProducerNumberTxt" value=""  >
+					</div>
+					<!-- ./inputGroup -->
+
+					<!-- Resident License Number  -->
+					<div class="inputGroup">
+						<label for="residentLicenseNumberTxt" >Resident License Number</label>    
+						<input type="text" name="residentLicenseNumber" id="residentLicenseNumberTxt" value="" >
+					</div>
+					<!-- ./inputGroup -->
+					
+
+					<!-- Resident License State -->
+					<div class="optionGroup">
+						<label class="optionTitle" for="residentLicenseStateOpt" >Resident License State</label>    
+						<select name="residentLicenseNumber" id="residentLicenseStateOpt" >
+							<option value="">-- Select One --</option>
+							
+						</select>
+					</div>
+					<!-- ./optionGroup -->
+					
+					<!-- Non-resident state(s)  -->
+					<div class="optionGroup">
+						<label class="optionTitle">Do you want to be appointed in any non-resident state(s)?</label>
+						<label>
+							<input type="radio" name="nonResidentAppointment" class="yesOpt" value="Y">
+							Yes
+						</label>
+						<label>
+							<input type="radio" name="nonResidentAppointment" class="noOpt" value="N">
+							No
+						</label>
+					
+					</div>
+					<!-- ./ optionGroup -->
+					
+					<div class="optionGroup">
+						<label class="optionTitle">Please Select all States in which you desire to become appointed using your non-resident licensing.</label>
+
+						<label>
+							<input type="checkbox" name="nonResidentState" class="alabamaOpt" value="AL">
+							Alabama
+						</label>
+						<label>
+							<input type="checkbox" name="nonResidentState" class="alaskaOpt" value="AK">
+							Alaska
+						</label>
+						<label>
+							<input type="checkbox" name="nonResidentState" class="arizonaOpt" value="AZ">
+							Arizona
+						</label>
+						<label>
+							<input type="checkbox" name="nonResidentState" class="arkansasOpt" value="AR">
+							Arkansas
+						</label>
+						
+					</div>
+					<!-- ./optionGroup -->
+
+					<!-- Min 1M Life and health  -->
+					<div class="optionGroup">
+						<label class="optionTitle">I currently have a minimum of $1M/$1M Life and Health Errors and Ommissions coverage.</label>
+						<label>
+							<input type="checkbox" name="min1MilCoverage" class="yesOpt" value="Yes">
+							Yes
+						</label>
+						<label>
+							<input type="checkbox" name="min1MIlCoverage" class="noOpt" value="N">
+							No
+						</label>
+						
+					</div>
+					<!-- ./optionGroup -->
+					
+
+					<div class="inputGroup">
+						<label for="eOExpriationDate" >E&amp;O Expriation Date</label>    
+						<input type="date" name="eOExpriationDate" id="eOExpriationDate" value=""  >
+					</div>
+					<!-- ./ inputGroup -->                    
+					
+
+					<!-- Documents -->
+					<p>
+					Please attach copies of Resident State and any Non-Resident State(s) licensing, along with Proof of E&amp;O Coverage by uploading them to the the approipate fields below
+					</p>
+
+					<div class="inputGroup">
+						<label for="residentStateLicenseDocumentFile" >Resident State License Document</label>    
+						<input type="file" name="residentStateLicenseDocument" id="residentStateLicenseDocumentFile" required="required" >
+					</div>
+					<!-- ./inputGroup -->
+
+					<div class="inputGroup">
+						<label for="nonResidentLicenseDocumentFile" >Non Resident License Document</label>    
+						<input type="file" name="nonResidentLicenseDocument" id="nonResidentLicenseDocumentFile" >
+					</div>
+					<!-- ./inputGroup -->
+					
+					<div class="inputGroup">
+						<label for="nonResidentLicenseDocumentFile" >Non Resident License Document</label>    
+						<input type="file" name="nonResidentLicenseDocument" id="nonResidentLicenseDocumentFile" >
+					</div>
+					<!-- ./inputGroup -->
+					
+					<div class="inputGroup">
+						<label for="nonResidentLicenseDocumentFile" >Non Resident License Document</label>    
+						<input type="file" name="nonResidentLicenseDocument" id="nonResidentLicenseDocumentFile" >
+					</div>
+					<!-- ./inputGroup -->
+
+					<div class="inputGroup">
+						<label for="eOProofofCoverageFile" >E&amp;O Proof of Coverage</label>    
+						<input type="file" name="eOProofofCoverage" id="eOProofofCoverageFile"  >
+					</div>
+					<!-- ./inputGroup -->                   
+					<p>
+						Please note: Your appointment request will be pended until receipt of the required documentation.
+						As soon as possible, please submit any documents not attached to this form via fax to: 931-903-1210 or via email to: tsmith@southerninsurance.net
+					</p>
+				
+				</fieldset>
+				<!-- ./ License fieldset -->                
+
+			
+				<fieldset id="finishFldset" class="collapse" >
+					<legend>Finish</legend>
+
+					<!-- Appointment Request(s) -->
+					Please indicate the company(ies) with whom you desire to be appointed. The companies below each offer product in your Resident or Non-Resident state(s).
+					
+					
+					<div class="appointments">
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="humanaApt" class="humanaOpt" value="Y">
+								Humana
+							</label>
+							<p class='help'>(Medicare Advantage, PDP, Medicare Supplement, Individual Major Medical, etc.)</p>
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="silverscriptApt" class="silverscript/CVSCaremarkOpt" value="Y">
+								Silverscript/CVS Caremark
+							</label>
+							<p class='help'> (Prescription Drug Plan) </p>
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="medicoApt" class="medicoOpt" value="Y">
+								Medico
+							</label>
+							<p class='help'>(Medicare Supplement, Dental, Vision, Hearing, Hospital Indemnity, Final Expense, etc.)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="KemperApt" class="kemperSeniorSolutionsOpt" value="Y">
+								Kemper Senior Solutions
+							</label>
+							<p class='help'>(Home Health Care)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="standardLifeApt" class="standardLifeCasualtyOpt" value="Y">
+								Standard Life &amp; Casualty
+							</label>
+							<p class='help'>  (Home Health Care) </p>
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="wellcareApt" class="wellcareOpt" value="Y">
+								Wellcare
+							</label>
+							<p class='help'>(Medicare Advantage, Prescription Drug Plans)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="cignaHealthspringApt" class="cignaHealthspringOpt" value="Y">
+								Cigna Healthspring
+							</label>
+							<p class='help'>(Medicare Advantage) </p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="cignaApt" class="cignaOpt" value="Y">
+								Cigna
+							</label>
+							<p class='help'> (Medicare Supplement)</p>   
+						</div>
+						<!-- ./ optionGroup -->
+		
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="aetnaCoventryApt" class="aetna/CoventryOpt" value="Y">
+								Aetna/Coventry
+							</label>
+							<p class='help'>(Medicare Advantage)</p>
+						</div>
+						<!-- ./ optionGroup -->
+			
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="aetnaApt" class="aetnaOpt" value="Y">
+								Aetna
+							</label>
+							<p class='help'>(Medicare Supplement)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="equitableApt" class="equitableOpt" value="Y">
+								Equitable
+							</label>
+							<p class='help'>(Medicare Supplement)</p>
+							
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="gtlApt" class="gTLOpt" value="Y">
+								GTL
+							</label>
+							
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="combinedApt" class="combinedOpt" value="Y">
+								Combined
+							</label>
+							
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="gerberMedSuppApt" class="gerberOpt" value="Y">
+								Gerber
+							</label>
+							<p class='help'>(Medicare Supplement)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+			
+							<label>
+								<input type="checkbox" name="gerberFinalApt" class="gerberOpt" value="Y">
+								Gerber
+							</label>
+							<p class='help'>(Final Expense)</p>
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="lifeSecureApt" class="lifeSecureOpt" value="Y">
+								Life Secure
+							</label>
+							
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="unitedHomeLifeApt" class="unitedHomeLifeOpt" value="Y">
+								United Home Life
+							</label>
+							<p class='help'>(Medicare Supplement, etc.)</p>
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="washingtonNationalApt" class="washingtonNationalOpt" value="Y">
+								Washington National
+							</label>
+							
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="standardLifeAccidentApt" class="standardLifeandAccidentOpt" value="Y">
+								Standard Life and Accident
+							</label>
+							<p class='help'>(SLAICO)</p>    
+						</div>
+						<!-- ./ optionGroup -->
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="todaysOptionApt" class="todaysOptionsOpt" value="Y">
+								Today's Options
+							</label>
+							<p class='help'>(Medicare Advantage)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="unitedHealthcareOneApt" class="unitedHealthcareOneOpt" value="Y">
+								United Healthcare One
+							</label>
+							<p class='help'>(Individual Major Medical, Short Term Medical, etc.)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="humanaOneApt" class="humanaOneOpt" value="Y">
+								Humana One
+							</label>
+							<p class='help'> (Individual Major Medical, Short Term Medical, Etc.)</p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="silverscriptApt" class="silverscriptOpt" value="Y">
+								Silverscript
+							</label>
+							<p class='help'></p>
+						</div>
+						<!-- ./ optionGroup -->
+						
+						<div class="optionGroup">
+							
+							<label>
+								<input type="checkbox" name="cignaPdpApt" class="cIGNAOpt" value="Y">
+								CIGNA
+							</label>
+							<p class='help'> (PDP) </p>
+						</div>
+						<!-- ./ optionGroup -->
+
+					</div>
+					
+				</fieldset>
+				<!-- ./ fieldset -->
+				
+
+
+			</div>
+			<!--  ./formBody -->
+
+		</main>
+
+		<footer>
+			<% include ../partials/footer %>
+		</footer>
+		<% include ../partials/scripts %>
+	</body>
+
+
+	<script type="text/javascript">
+		
+		// $( document ).ready( function() {
+		//     //$( '.formBody fieldset' )collapse({toggle:false});
+		//     //
+		//     formCollapse();
+		//     formOpen( 'agentInfoFldset' );
+
+		//     $( '.formTracker-nav ul li a' ).on( 'click', function(){
+
+		//         $ele = $( this );
+
+		//         $( '.formBody fieldset' ).collapse( 'hide' );
+
+		//         var target = $ele.attr( 'data-target' );
+
+		//         console.log( target );
+		//         formOpen( target );
+
+		//         $( '.formTracker-nav ul li' ).removeClass( 'active' );
+
+		//         $ele.parent().addClass( 'active' );
+
+		//     });
+
+		// });
+
+		// function formCollapse(){
+
+		//     $( '.formBody fieldset' ).collapse( 'hide' );
+		//     console.log( $( '.formBody fieldset' ) );
+
+		// }
+
+		// function formOpen( fieldset ){
+
+		//     formCollapse();
+		//     $( '#'+fieldset ).collapse( 'show' );
+		// }
+
+	</script>
+	
+</html>
