@@ -39,7 +39,6 @@ var Documents = React.createClass({
 
     render:function(){
 
-
         return(
             <fieldset
                 id="licenseFldset"

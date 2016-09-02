@@ -876,7 +876,7 @@ var RegistrationFullForm = React.createClass({
 
                         </fieldset>
 
-                        <fieldset id="finishFldset" className={formSteps.finishFldset} >
+                        <fieldset id="finishFldset" className={ formSteps.finishFldset } >
                             <legend>Finish</legend>
 
                             Please indicate the company(ies) with whom you desire to be appointed. The companies below each offer product in your Resident or Non-Resident state(s).

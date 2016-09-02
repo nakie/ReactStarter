@@ -13,10 +13,21 @@ var RadioBtn = React.createClass({
 
     changeValue: function( event ) {
 
+        var newState = {};
+
+        /** [ event.target.name ] syntax below does not work in IE
+         * this.setState( { [event.target.name]: event.target.value } );
+         *
+         * alteraning to use square bracket notation of reference/setting
+         * an object key works across browsers..
+         *
+         */
+        newState[ event.target.name ] = event.target.value;
+        this.setState( newState );
+
         //console.log( event.target.name );
-
-
-        this.setState( { [event.target.name]: event.target.value} );
+        // var key = event.target.name;
+        // this.setState( { [event.target.name]: event.target.value} );
 
         if (typeof( this.props.changeValue ) == 'undefined') {
 

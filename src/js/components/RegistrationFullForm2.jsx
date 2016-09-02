@@ -2,7 +2,6 @@
  * Created by Nathan on 8/18/2016.
  */
 
-
 var React 		= require( 'react' );
 
 // var Tracker 	= require( './FormTracker' );
@@ -13,22 +12,25 @@ var Form 		= require( 'formsy-react' ).Form;
 // This should get the "Form" variable from the formsy-react module/projct
 // <Form /> is a Form Component via Formsy-react
 
-var FrmInput 	= require( './Input' );
-var FrmCheckbox = require( './Checkbox' );
-var FrmRadio	= require( './Radio' );
-var FrmOption   = require( './Option' );
+// var FrmInput 	= require( './Input' );
+// var FrmCheckbox = require( './Checkbox' );
+// var FrmRadio	= require( './Radio' );
+// var FrmOption   = require( './Option' );
 var OptionGroup	= require( './OptionGroup' );
 
 var states = require( '../states' );
 
 var AgentInformation	= require( './AgentInformation' );
-var License	= require( './License' );
-var Documents	= require( './Documents' );
+var License	            = require( './License' );
+var Documents	        = require( './Documents' );
+var Companies	        = require( './Companies' );
+var FinishContract      = require( './FinishLongContract' );
 
 var formSteps = {
     agentInfoFldset: "active",
-    addressFldset: "",
     licenseFldset: "",
+    documentsFldset: "",
+    companiesFldset: "",
     finishFldset: ""
 }; // END formSteps {}
 
@@ -42,9 +44,9 @@ var RegistrationFullForm2 = React.createClass({
         };
     },
 
-    onClick: function( value ) {
+    onClick: function( value, event ) {
 
-        for ( var k in formSteps){
+        for ( var k in formSteps ){
 
             if( formSteps.hasOwnProperty( k ) ){
 
@@ -58,7 +60,10 @@ var RegistrationFullForm2 = React.createClass({
 
         this.setState( { steps: formSteps  } );
 
-        event.preventDefault();
+        if( typeof( event ) != 'undefined' ){
+
+            event.preventDefault();
+        }
 
     },
 
@@ -87,6 +92,7 @@ var RegistrationFullForm2 = React.createClass({
         var newState = { 'nonRes': value };
 
         this.setState( newState );
+
     },
 
     render: function(){
@@ -94,6 +100,7 @@ var RegistrationFullForm2 = React.createClass({
         //console.log( "Called: RegistrationFullForm render()" );
         //var selectNonResStates = this.getNonResState();
 
+        //console.log( this.props.data );
         return(
 
             <div className="row">
@@ -105,14 +112,16 @@ var RegistrationFullForm2 = React.createClass({
                             <li className={formSteps.agentInfoFldset} >
                                 <a href="#" data-target="agentInfoFldset" onClick={ this.onClick.bind( this, "agentInfoFldset" ) } > Agent Information </a>
                             </li>
-                            <li className={formSteps.addressFldset} >
-                                <a href="#" data-target="addressFldset" onClick={ this.onClick.bind( this, "addressFldset" ) } > License </a>
-                            </li>
                             <li className={formSteps.licenseFldset} >
-                                <a href="#" data-target="licenseFldset" onClick={ this.onClick.bind( this, "licenseFldset" )} > Documents </a>
+                                <a href="#" data-target="licenseFldset" onClick={ this.onClick.bind( this, "licenseFldset" ) } > License </a>
                             </li>
-
-                            <li className = { formSteps.finishFldset    } >
+                            <li className={formSteps.documentsFldset} >
+                                <a href="#" data-target="documentsFldset" onClick={ this.onClick.bind( this, "documentsFldset" )} > Documents </a>
+                            </li>
+                            <li className={formSteps.companiesFldset} >
+                                <a href="#" data-target="companiesFldset" onClick={ this.onClick.bind( this, "companiesFldset" )} > Companies </a>
+                            </li>
+                            <li className = { formSteps.finishFldset } >
                                 <a href="#" data-target="finishFldset" onClick={ this.onClick.bind( this, "finishFldset" ) } > Finish </a>
                             </li>
                         </ul>
@@ -130,261 +139,37 @@ var RegistrationFullForm2 = React.createClass({
                     >
 
                         <AgentInformation
-                            active={ formSteps.agentInfoFldset }
-                            handleNext = { this.onClick }
-                            nextStep = { "addressFldset" }
+                            active      = { formSteps.agentInfoFldset }
+                            handleNext  = { this.onClick }
+                            nextStep    = { "licenseFldset" }
+                            postData    = { this.props.data }
                         />
 
                         <License
-                            active={ formSteps.addressFldset }
-                            handleNext = { this.onClick }
-                            nextStep = { "licenseFldset" }
+                            active      = { formSteps.licenseFldset }
+                            handleNext  = { this.onClick }
+                            nextStep    = { "documentsFldset" }
                             reportNonResStates = { this.reportNonResStates }
+                            postData    = { this.props.data }
                         />
 
-
                         <Documents
-                            active={ formSteps.licenseFldset }
-                            handleNext = { this.onClick }
-                            nextStep = { "finishFldset" }
+                            active      = { formSteps.documentsFldset }
+                            handleNext  = { this.onClick }
+                            nextStep    = { "companiesFldset" }
                             nonResStates = { this.state.nonResStates }
                         />
 
-                        <fieldset id="finishFldset" className={formSteps.finishFldset} >
-                            <legend>Finish</legend>
+                        <Companies
+                            active      = { formSteps.companiesFldset }
+                            handleNext  = { this.onClick }
+                            nextStep    = { "finishFldset" }
+                        />
 
-                            Please indicate the company(ies) with whom you desire to be appointed. The companies below each offer product in your Resident or Non-Resident state(s).
+                        <FinishContract
+                            active={ formSteps.finishFldset }
+                        />
 
-                            <div className="appointments">
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="humanaApt" className="humanaOpt" value="Y" />
-                                        Humana
-                                    </label>
-                                    <p className='help'>(Medicare Advantage, PDP, Medicare Supplement, Individual Major Medical, etc.)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="silverscriptApt" className="silverscript/CVSCaremarkOpt" value="Y" />
-                                        Silverscript/CVS Caremark
-                                    </label>
-                                    <p className='help'> (Prescription Drug Plan) </p>
-                                </div>
-
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="medicoApt" className="medicoOpt" value="Y" />
-                                        Medico
-                                    </label>
-                                    <p className='help'>(Medicare Supplement, Dental, Vision, Hearing, Hospital Indemnity, Final Expense, etc.)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="KemperApt" className="kemperSeniorSolutionsOpt" value="Y" />
-                                        Kemper Senior Solutions
-                                    </label>
-                                    <p className='help'>(Home Health Care)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="standardLifeApt" className="standardLifeCasualtyOpt" value="Y" />
-                                        Standard Life &amp; Casualty
-                                    </label>
-                                    <p className='help'>  (Home Health Care) </p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="wellcareApt" className="wellcareOpt" value="Y" />
-                                        Wellcare
-                                    </label>
-                                    <p className='help'>(Medicare Advantage, Prescription Drug Plans)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="cignaHealthspringApt" className="cignaHealthspringOpt" value="Y" />
-                                        Cigna Healthspring
-                                    </label>
-                                    <p className='help'>(Medicare Advantage) </p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="cignaApt" className="cignaOpt" value="Y" />
-                                        Cigna
-                                    </label>
-                                    <p className='help'> (Medicare Supplement)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="aetnaCoventryApt" className="aetna/CoventryOpt" value="Y" />
-                                        Aetna/Coventry
-                                    </label>
-                                    <p className='help'>(Medicare Advantage)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="aetnaApt" className="aetnaOpt" value="Y" />
-                                        Aetna
-                                    </label>
-                                    <p className='help'>(Medicare Supplement)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="equitableApt" className="equitableOpt" value="Y" />
-                                        Equitable
-                                    </label>
-                                    <p className='help'>(Medicare Supplement)</p>
-
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="gtlApt" className="gTLOpt" value="Y" />
-                                        GTL
-                                    </label>
-
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="combinedApt" className="combinedOpt" value="Y" />
-                                        Combined
-                                    </label>
-
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="gerberMedSuppApt" className="gerberOpt" value="Y" />
-                                        Gerber
-                                    </label>
-                                    <p className='help'>(Medicare Supplement)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="gerberFinalApt" className="gerberOpt" value="Y" />
-                                        Gerber
-                                    </label>
-                                    <p className='help'>(Final Expense)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="lifeSecureApt" className="lifeSecureOpt" value="Y" />
-                                        Life Secure
-                                    </label>
-
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="unitedHomeLifeApt" className="unitedHomeLifeOpt" value="Y" />
-                                        United Home Life
-                                    </label>
-                                    <p className='help'>(Medicare Supplement, etc.)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="washingtonNationalApt" className="washingtonNationalOpt" value="Y" />
-                                        Washington National
-                                    </label>
-
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="standardLifeAccidentApt" className="standardLifeandAccidentOpt" value="Y" />
-                                        Standard Life and Accident
-                                    </label>
-                                    <p className='help'>(SLAICO)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="todaysOptionApt" className="todaysOptionsOpt" value="Y" />
-                                        Today's Options
-                                    </label>
-                                    <p className='help'>(Medicare Advantage)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="unitedHealthcareOneApt" className="unitedHealthcareOneOpt" value="Y" />
-                                        United Healthcare One
-                                    </label>
-                                    <p className='help'>(Individual Major Medical, Short Term Medical, etc.)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="humanaOneApt" className="humanaOneOpt" value="Y" />
-                                        Humana One
-                                    </label>
-                                    <p className='help'> (Individual Major Medical, Short Term Medical, Etc.)</p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="silverscriptApt" className="silverscriptOpt" value="Y" />
-                                        Silverscript
-                                    </label>
-                                    <p className='help'></p>
-                                </div>
-
-                                <div className="optionGroup">
-
-                                    <label>
-                                        <input type="checkbox" name="cignaPdpApt" className="cIGNAOpt" value="Y" />
-                                        CIGNA
-                                    </label>
-                                    <p className='help'> (PDP) </p>
-                                </div>
-
-                            </div>
-
-                            <button
-                                type 		= "submit"
-                                className 	= "btn btn-default"
-
-                            >
-                                Submit!
-                            </button>
-                        </fieldset>
                     </Form>
                 </div>
 

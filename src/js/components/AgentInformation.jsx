@@ -183,9 +183,12 @@ var AgentInformation = React.createClass({
 
                 <div className= { activeAddress.primaryAddress + ' primaryAddress' } >
 
+                    <p className="addressHint">
+                        <strong>Note:</strong>  Where would you like commissions checks sent
+                    </p>
                     <FrmInput
                         name	    = "businessMailingAddress"
-                        title	    = "Business Mailing Address"
+                        title	    = "Address"
                         value       = { primary.address }
                         changeValue = { this.changeValue }
                         modelGroup  = 'primary'
@@ -194,7 +197,7 @@ var AgentInformation = React.createClass({
 
                     <FrmInput
                         name	= "businessMailingAddressLine2"
-                        title	= "Business Mailing Address Line 2"
+                        title	= "Address Line 2"
                         value   = { primary.address_2 }
                         changeValue = { this.changeValue }
                         modelGroup  = 'primary'
@@ -212,14 +215,6 @@ var AgentInformation = React.createClass({
                             modelValue  = 'city'
                         />
 
-                        <FrmInput
-                            name		= "postalCode"
-                            title		= "Postal Code"
-                            value       = { primary.zip }
-                            changeValue = { this.changeValue }
-                            modelGroup  = 'primary'
-                            modelValue  = 'zip'
-                        />
 
                         <OptionGroup
                             type	    = "select"
@@ -235,6 +230,16 @@ var AgentInformation = React.createClass({
                             />
 
                         </OptionGroup>
+
+                        <FrmInput
+                            name		= "postalCode"
+                            title		= "Postal Code"
+                            value       = { primary.zip }
+                            changeValue = { this.changeValue }
+                            modelGroup  = 'primary'
+                            modelValue  = 'zip'
+                        />
+
 
                     </div>
 
@@ -300,9 +305,13 @@ var AgentInformation = React.createClass({
 
                 <div className= { activeAddress.homeAddress + ' homeAddress' } >
 
+                    <p className="addressHint">
+                        <strong>Note:</strong>  Home address is optional but can be provided if it differs from the primary address
+                    </p>
+
                     <FrmInput
                         name	    = "homeMailingAddress"
-                        title	    = "Home Mailing Address"
+                        title	    = "Address"
                         value       = { home.address }
                         changeValue = { this.changeValue }
                         modelGroup  = 'home'
@@ -312,7 +321,7 @@ var AgentInformation = React.createClass({
 
                     <FrmInput
                         name	    = "homeMailingAddressLine2"
-                        title	    = "Home homeMailingAddressLine2"
+                        title	    = "Address Line 2"
                         value       = { home.address_2 }
                         changeValue = { this.changeValue }
                         modelGroup  = 'home'
@@ -324,7 +333,7 @@ var AgentInformation = React.createClass({
 
                         <FrmInput
                             name		= "homeCity"
-                            title		= "Home City"
+                            title		= "City"
                             value       = { home.city }
                             changeValue = { this.changeValue }
                             modelGroup  = 'home'
@@ -335,7 +344,7 @@ var AgentInformation = React.createClass({
                         <OptionGroup
                             type	= "select"
                             name	= "homeState"
-                            title	= "Home State"
+                            title	= "State"
                             disabled    = { home.disabled }
                             options     = { states }
                         >
@@ -349,7 +358,7 @@ var AgentInformation = React.createClass({
 
                         <FrmInput
                             name		= "homePostalCode"
-                            title		= "Home Postal Code"
+                            title		= "Postal Code"
                             value       = { home.zip }
                             changeValue = { this.changeValue }
                             modelGroup  = 'home'
@@ -381,9 +390,13 @@ var AgentInformation = React.createClass({
 
                 <div className= { activeAddress.shippingAddress + ' shippingAddress' } >
 
+                    <p className="addressHint">
+                        <strong>Note:</strong>  Physical address for shipping supplies ( via FedEx/UPS ).
+                    </p>
+
                     <FrmInput
                         name	    = "shippingAddress"
-                        title	    = "Shipping Address"
+                        title	    = "Address"
                         value       = {  ship.address }
                         changeValue = { this.changeValue }
                         modelGroup  = 'shipping'
@@ -393,7 +406,7 @@ var AgentInformation = React.createClass({
 
                     <FrmInput
                         name		= "shippingAddressLine2"
-                        title		= "Shipping Address Line 2"
+                        title		= "Address Line 2"
                         value       = {  ship.address_2 }
                         changeValue = { this.changeValue }
                         modelGroup  = 'shipping'
@@ -405,7 +418,7 @@ var AgentInformation = React.createClass({
 
                         <FrmInput
                             name		= "shipToCity"
-                            title		= "Ship To City"
+                            title		= "City"
                             value       = {  ship.city }
                             changeValue = { this.changeValue }
                             modelGroup  = 'shipping'
@@ -416,7 +429,7 @@ var AgentInformation = React.createClass({
                         <OptionGroup
                             type	= "select"
                             name	= "shipToState"
-                            title	= "Ship To State"
+                            title	= "State"
                             disabled    = { ship.disabled }
                             options     = { states }
                         >
@@ -431,7 +444,7 @@ var AgentInformation = React.createClass({
 
                         <FrmInput
                             name		= "shipToPostalCode"
-                            title		= "Ship To Postal Code"
+                            title		= "Postal Code"
                             value       = {  ship.zip }
                             changeValue = { this.changeValue }
                             modelGroup  = 'shipping'
@@ -449,7 +462,7 @@ var AgentInformation = React.createClass({
         }
     },
 
-    handleAddress: function( value ) {
+    handleAddress: function( value, event ) {
 
         for( var k in activeAddress){
 
@@ -464,11 +477,23 @@ var AgentInformation = React.createClass({
         }
 
         this.setState( { address: activeAddress  } );
+        event.preventDefault();
+
     },
 
     nextStep:function(){
 
         this.props.handleNext( this.props.nextStep );
+    },
+
+    getPostData: function( key ){
+
+        if( typeof( this.props.postData[ key ] ) != 'undefined' ){
+            return this.props.postData[ key ];
+        }
+
+        return "";
+
     },
 
     render: function(){
@@ -495,6 +520,7 @@ var AgentInformation = React.createClass({
                     <FrmInput
                         name		= "firstName"
                         title		= "First Name"
+                        value       = { this.getPostData( "firstName" ) }
                         required
                     />
 
@@ -507,6 +533,7 @@ var AgentInformation = React.createClass({
                     <FrmInput
                         name		= "lastName"
                         title		= "Last Name"
+                        value       = { this.getPostData( "lastName" ) }
                         required
                     />
 
@@ -524,6 +551,7 @@ var AgentInformation = React.createClass({
                     <FrmInput
                         name		= "phone"
                         title		= "Phone"
+                        value       = { this.getPostData( "phoneNumber" ) }
                         required
                     />
 
@@ -533,7 +561,7 @@ var AgentInformation = React.createClass({
                         title		= "Secondary Phone"
                     />
 
-                </div> {/* END div.agentName */}
+                </div> {/* END div.phoneNumbers */}
 
                 <label>Address</label>
 
@@ -561,6 +589,10 @@ var AgentInformation = React.createClass({
                         name		= "primaryEmail"
                         type		= "email"
                         title		= "Primary Email"
+                        value       = { this.getPostData( "emailAddress" ) }
+                        validations     = "isEmail"
+                        validationError = "Must be a valid email address"
+                        validateOnBlur  = { true }
                         required
                     />
 
@@ -568,6 +600,9 @@ var AgentInformation = React.createClass({
                         name		= "secondaryEmail"
                         type		= "email"
                         title		= "Secondary Email"
+                        validations     = "equalsField:primaryEmail"
+                        validationError = "Email addresses do not match"
+                        validateOnBlur  = { true }
                     />
 
                 </div> {/* END div.agentName */}

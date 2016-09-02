@@ -1,11 +1,7 @@
 var React = require( 'react' );
 
 
-
-
-
 var Option = React.createClass({
-
 
 
 	changeValue: function( event ) {
@@ -19,6 +15,7 @@ var Option = React.createClass({
 		);
 
 	}
+
 });
 
 

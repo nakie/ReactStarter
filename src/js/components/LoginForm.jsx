@@ -8,7 +8,6 @@ var Form        = require( 'formsy-react' ).Form;
 var FrmInput    = require( './Input');
 var FrmCheckbox = require( './Checkbox' );
 
-
 var LoginForm = React.createClass({
 
 	getInitialState: function() {
@@ -16,7 +15,7 @@ var LoginForm = React.createClass({
 	},
 
 	submit: function(){
-		window.location = "/loggedin";
+		window.location = "/contract-user";
 	},
 
 	enableButton: function() {
@@ -32,50 +31,51 @@ var LoginForm = React.createClass({
 		return (
 
 			<Form 
-				onSubmit={this.submit} 
-				onValid={ this.enableButton } 
-				onInvalid={ this.disableButton } 
-				className=" col-sm-11 col-lg-10 block-center loginFrm" 
+				onSubmit	= { this.submit }
+				onValid		= { this.enableButton }
+				onInvalid	= { this.disableButton }
+				className	= " col-sm-11 col-lg-10 block-center loginFrm"
 			>
-				
 
 				<div className="row">
-
 					<FrmInput 
-						value ="" 
-						name="username" 
-						title="Username" 
-						className="col-sm-5" 
-						showLabel={false}
+						value 		= ""
+						name		= "username"
+						title		= "Username"
+						className	= "col-sm-5"
+						showLabel	= { false }
+						validations = "isEmail"
+                        validationError = "Must be a valid email address"
+						validateOnBlur  = { true }
 						required
 					/>
-
 					<FrmInput 
-						value ="" 
-						type="password"
-						name="password" 
-						title="Password" 
-						className="col-sm-5" 
-						showLabel={false}
+						value 		= ""
+						type		= "password"
+						name		= "password"
+						title		= "Password"
+						className	= "col-sm-5"
+						showLabel 	= { false }
 						required 
 					/>
-
 					<button 
-						type="submit" 
-						className="btn btn-default input-sm " 
+						type		= "submit"
+						className	= "btn btn-default input-sm "
 					>
 						Sign In 
 					</button>
-				
+
 				</div>
 
-				<div className="row">
-					<div className="pull-right" >
+				<div className = "row">
+					<div className = "pull-right col-sm-7" >
 
-						<FrmCheckbox 
-							name="rememberMe"
-							title="Remember Me"
-						/>
+						{/*<FrmCheckbox */}
+							{/*name	= "rememberMe"*/}
+							{/*title	= "Remember Me"*/}
+						{/*/>*/}
+
+						<a href="/account-recovery"> Forgot Username or Password? </a>
 
 					</div>
 				</div>

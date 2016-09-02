@@ -19,7 +19,6 @@ var OptionGroup = React.createClass({
 			return;
 		}
 
-
 	}, // END function getTitle()
 
     changeValue: function(e){
@@ -74,7 +73,7 @@ var OptionGroup = React.createClass({
             //c
             //console.log( propOptions );
             //console.log( this.props.children );
-			return children ;
+			return children;
 		}
 
 	}, // END function renderOptions()
